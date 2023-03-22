@@ -1,21 +1,11 @@
-﻿using MotoApp;
+﻿using MotoApp.Entities;
+using MotoApp.Entities.Repositories;
 
-var stack = new BasicStack();
-stack.Push(67.7);
-stack.Push(11);
-stack.Push(36);
-stack.Push(1);
+var employeeRepository = new EmployeeRepository();
 
-double sum = 0.0;
+employeeRepository.Add(new Employee { FirstName = "Jacek" });
+employeeRepository.Add(new Employee { FirstName = "Aldonka" });
+employeeRepository.Add(new Employee { FirstName = "Julia" });
+employeeRepository.Add(new Employee { FirstName = "Łukasz" });
+employeeRepository.Save();
 
-while (stack.Count > 0)
-{
-    double item = stack.Pop();
-    Console.WriteLine($"Item: {item}");
-    sum += item;
-}
-
-Console.WriteLine($"Sum: {sum}");
-
-var licznik = stack.Count;
-Console.WriteLine($"Count: {licznik}");
