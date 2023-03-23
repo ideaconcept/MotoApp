@@ -1,7 +1,7 @@
 ﻿using MotoApp.Entities;
-using MotoApp.Entities.Repositories;
+using MotoApp.Repositories;
 
-var employeeRepository = new EmployeeRepository();
+var employeeRepository = new GenericRepository<Employee, int>();
 
 employeeRepository.Add(new Employee { FirstName = "Jacek" });
 employeeRepository.Add(new Employee { FirstName = "Aldonka" });

@@ -1,4 +1,4 @@
-﻿namespace MotoApp.Entities.Repositories
+﻿namespace MotoApp.Repositories
 {
     using MotoApp.Entities;
 
