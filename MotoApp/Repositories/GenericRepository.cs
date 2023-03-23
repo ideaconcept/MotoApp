@@ -3,7 +3,7 @@
     using MotoApp.Entities;
 
     public class GenericRepository<TEntity, TKey>
-        where TEntity : class, IEntity
+        where TEntity : class, IEntity, new()
         where TKey : struct 
     {
         protected readonly List<TEntity> _items = new();
@@ -16,7 +16,7 @@
 
         public TEntity GetById(int id)
         {
-            return default(TEntity);
+            return default;
             //return _items.Single(item => item.Id == id);
         }
         
