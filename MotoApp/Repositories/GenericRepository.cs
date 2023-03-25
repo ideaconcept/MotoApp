@@ -14,7 +14,7 @@
             _items.Add(item);
         }
 
-        public TEntity GetById(int id)
+        public TEntity? GetById(int id)
         {
             return default;
             //return _items.Single(item => item.Id == id);
