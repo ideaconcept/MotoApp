@@ -3,7 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using MotoApp.Entities;
 
-    internal class MotoAppDbContext : DbContext
+    public class MotoAppDbContext : DbContext
     {
         public DbSet<Employee> Employees => Set<Employee>();
 
