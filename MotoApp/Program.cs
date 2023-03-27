@@ -1,31 +1,34 @@
 ﻿using MotoApp.Data;
 using MotoApp.Entities;
 using MotoApp.Repositories;
+using MotoApp.Repositories.Extensions;
 
-var employeeRepository = new SqlRepository<Employee>(new MotoAppDbContext());
+var repository = new SqlRepository<Employee>(new MotoAppDbContext());
 
-AddEmployess(employeeRepository);
-AddManagers(employeeRepository);
-WriteAllToConsole(employeeRepository);
-
-
-static void AddEmployess(IRepository<Employee> employeeRepository)
+var employees = new[]
 {
-    employeeRepository.Add(new Employee { Name = "Tomasz" });
-    employeeRepository.Add(new Employee { Name = "Joanna" });
-    employeeRepository.Add(new Employee { Name = "Paulina" });
-    employeeRepository.Add(new Employee { Name = "Krzysztof" });
-    employeeRepository.Save();
-}
+    new Employee { Name = "Tomasz" },
+    new Employee { Name = "Joanna" },
+    new Employee { Name = "Paulina" },
+    new Employee { Name = "Krzysztof" }
+};
 
-static void AddManagers(IWriteRepository<Manager> managerRepository)    
-{
-    managerRepository.Add(new Manager { Name = "Jacek" });
-    managerRepository.Add(new Manager { Name = "Aldonka" });
-    managerRepository.Add(new Manager { Name = "Julia" });
-    managerRepository.Add(new Manager { Name = "Łukasz" });
-    managerRepository.Save();
-}
+repository.AddBatch(employees);
+WriteAllToConsole(repository);
+
+
+
+
+//static void AddEmployess(IRepository<Employee> employeeRepository)
+//{
+//    employeeRepository.Add(new Employee { Name = "Tomasz" });
+//    employeeRepository.Add(new Employee { Name = "Joanna" });
+//    employeeRepository.Add(new Employee { Name = "Paulina" });
+//    employeeRepository.Add(new Employee { Name = "Krzysztof" });
+//    employeeRepository.Save();
+//}
+
+
 
 static void WriteAllToConsole(IReadRepository<IEntity> repository)
 {
