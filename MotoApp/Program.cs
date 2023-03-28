@@ -3,7 +3,20 @@ using MotoApp.Entities;
 using MotoApp.Repositories;
 using MotoApp.Repositories.Extensions;
 
-var repository = new SqlRepository<Employee>(new MotoAppDbContext());
+//var itemAdded = new ItemAdded<Employee>(EmployeeAdded);
+var repository = new SqlRepository<Employee>(new MotoAppDbContext(), EmployeeAdded);
+repository.ItemAdded += RepositoryOnItemAdded;
+
+static void RepositoryOnItemAdded(object? sender, Employee e)
+{
+    Console.WriteLine($"Employee added => {e.Name} from {sender?.GetType().Name}");
+}
+
+static void EmployeeAdded(object item)
+{
+    var employee = (Employee)item;
+    Console.WriteLine($"{employee.Name} added");
+}
 
 var employees = new[]
 {
@@ -15,19 +28,6 @@ var employees = new[]
 
 repository.AddBatch(employees);
 WriteAllToConsole(repository);
-
-
-
-
-//static void AddEmployess(IRepository<Employee> employeeRepository)
-//{
-//    employeeRepository.Add(new Employee { Name = "Tomasz" });
-//    employeeRepository.Add(new Employee { Name = "Joanna" });
-//    employeeRepository.Add(new Employee { Name = "Paulina" });
-//    employeeRepository.Add(new Employee { Name = "Krzysztof" });
-//    employeeRepository.Save();
-//}
-
 
 
 static void WriteAllToConsole(IReadRepository<IEntity> repository)
